@@ -10,6 +10,7 @@ function PrimaryButton({
   },
   backgroundColor = colors.primary,
   color = colors.font,
+  width = "100%",
 }) {
   return (
     <Pressable
@@ -21,7 +22,12 @@ function PrimaryButton({
           };
       }}
     >
-      <View style={[styles.container, { backgroundColor: backgroundColor }]}>
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: backgroundColor, width: width },
+        ]}
+      >
         <Text style={[styles.text, { color: color }]}>{children}</Text>
       </View>
     </Pressable>

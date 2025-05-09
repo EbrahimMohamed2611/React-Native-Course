@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, Alert, FlatList } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Alert,
+  FlatList,
+  useWindowDimensions,
+  ScrollView,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import colors from "../utils/colors";
@@ -23,6 +31,8 @@ function GameScreen({ userNumber, onGameOver }) {
   const [currentGuess, setCurrentGuess] = useState(intialGuess);
   // will add the initialGuess to the rounds becouse this is the first guess number happened
   const [guessRounds, setGuessRounds] = useState([intialGuess]);
+  // get the new width and height for the device when changing from portrait and landscape and verses
+  const { width, height } = useWindowDimensions();
 
   useEffect(() => {
     if (currentGuess === userNumber) onGameOver(guessRounds.length);
@@ -67,9 +77,8 @@ function GameScreen({ userNumber, onGameOver }) {
 
   const roundsLength = guessRounds.length;
 
-  return (
-    <View style={styles.container}>
-      <TitleApp>Opponent's Guess</TitleApp>
+  let content = (
+    <>
       <View style={styles.numberContainer}>
         <Text style={styles.number}>{currentGuess}</Text>
       </View>
@@ -88,6 +97,38 @@ function GameScreen({ userNumber, onGameOver }) {
           <Ionicons name="remove-sharp" size={30} color={colors.white} />
         </PrimaryButton>
       </View>
+    </>
+  );
+
+  if (width > 500)
+    content = (
+      <>
+        <View style={styles.buttonContainerLandscape}>
+          <PrimaryButton
+            backgroundColor={colors.accent}
+            color={colors.white}
+            onPress={() => nextGuessHandler(GREATER)}
+            width={100}
+          >
+            <Ionicons name="add-sharp" size={30} color={colors.white} />
+          </PrimaryButton>
+          <View style={styles.numberLandscape}>
+            <View style={styles.numberContainer}>
+              <Text style={styles.number}>{currentGuess}</Text>
+            </View>
+          </View>
+          <PrimaryButton onPress={() => nextGuessHandler(LOWER)} width={100}>
+            <Ionicons name="remove-sharp" size={30} color={colors.white} />
+          </PrimaryButton>
+        </View>
+      </>
+    );
+
+  return (
+    <View style={styles.container}>
+      <TitleApp>Opponent's Guess</TitleApp>
+      {content}
+
       <View style={styles.roundsContainer}>
         {/* {guessRounds.map((gussedRound) => (
           <Text key={gussedRound}>{gussedRound}</Text>
@@ -128,9 +169,19 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 60,
     justifyContent: "center",
+    alignSelf: "center",
   },
   buttonContainer: {
     width: "100%",
+  },
+  buttonContainerLandscape: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+  numberLandscape: {
+    flexDirection: "column",
+    marginHorizontal: 50,
   },
   instructions: {
     fontFamily: "Gilroy-Medium",

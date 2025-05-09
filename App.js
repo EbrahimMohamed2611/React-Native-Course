@@ -1,4 +1,4 @@
-import { SafeAreaView, View, StyleSheet, ScrollView } from "react-native";
+import { Dimensions, View, StyleSheet, Text, ScrollView } from "react-native";
 import StartGameScreen from "./screens/StartGameScreen";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
@@ -59,29 +59,70 @@ export default function App() {
         onStartNewScreen={startNewGameHandler}
       />
     );
+  const { width, height, scale, fontScale } = Dimensions.get("window");
 
-  return (
-    // <SafeAreaView style={styles.screen}>
-    // <ScrollView style={styles.screen}>
-    <View style={styles.screen}>
-      {/* <LinearGradient */}
+  return <View style={styles.screen}>{screen}</View>;
+  // return (
+  //   // <View style={{ maxWidth: 200, backgroundColor: "tomato", marginTop: 100 }}>
+  //   //   <Text numberOfLines={1}>
+  //   //     This is a really long sentence that would normally overflow.
+  //   //   </Text>
+  //   // </View>
+  //   <ScrollView contentContainerStyle={styles.container}>
+  //     <Text style={styles.title}>Fixed Width</Text>
+  //     <View style={[styles.box, { width: 100, backgroundColor: "skyblue" }]}>
+  //       <Text>Width: 100</Text>
+  //     </View>
 
-      {/* colors={[colors.backgroundColor, colors.backgroundColor]} */}
-      {/* style={styles.screen} */}
-      {/* > */}
-      {/* <StartGameScreen /> */}
-      {screen}
-      {/* <GameOverScreen
-        roundsNumber={4}
-        userNumber={20}
-        onStartNewScreen={() => console.log("pressed")}
-        /> */}
-      {/* </LinearGradient> */}
-    </View>
-    // </ScrollView>
-    // </SafeAreaView>
-  );
+  //     <Text style={styles.title}>minWidth (100)</Text>
+  //     <View
+  //       style={[styles.box, { minWidth: 150, backgroundColor: "lightgreen" }]}
+  //     >
+  //       <Text>Min Width: 100</Text>
+  //     </View>
+
+  //     <Text style={styles.title}>maxWidth (200)</Text>
+  //     <View
+  //       style={[styles.box, { maxWidth: 200, backgroundColor: "lightpink" }]}
+  //     >
+  //       <Text numberOfLines={1}>
+  //         This text is really long and the box stops growing at 200 width
+  //       </Text>
+  //     </View>
+
+  //     <Text style={styles.title}>Responsive Width: 80% with min/max</Text>
+  //     <View
+  //       style={[
+  //         styles.box,
+  //         {
+  //           width: screenWidth * 0.8,
+  //           minWidth: 100,
+  //           maxWidth: 300,
+  //           backgroundColor: "#ffa07a",
+  //         },
+  //       ]}
+  //     >
+  //       <Text>Width: 80% of screen (min 100, max 300)</Text>
+  //     </View>
+  //   </ScrollView>
+  // );
 }
+
+// const styles = StyleSheet.create({
+// container: {
+//   padding: 40,
+//   alignItems: "center",
+// },
+// title: {
+//   marginTop: 20,
+//   fontWeight: "bold",
+// },
+// box: {
+//   padding: 10,
+//   marginTop: 10,
+//   borderWidth: 1,
+// },
+// });
 
 const styles = StyleSheet.create({
   screen: {
