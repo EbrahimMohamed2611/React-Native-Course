@@ -1,8 +1,5 @@
 # React-Native-Course
 
-# GameHub
+Guess My Number App Screens:
 
-Guess Number Game
-    Screens:
-
-![start-game-screen](start-game-screen.png) ![game-screen](game-screen.png) ![game-over-screen](game-over-screen.png)
+![guess-my-number](guess-my-number.png)
