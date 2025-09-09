@@ -3,13 +3,15 @@ import React from "react";
 import { GlobalStyles } from "../../constants/Styles";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ExpneseItem({ description, date, amount }) {
+export default function ExpneseItem({ description, date, amount, id }) {
   const formattedDate = `${date.getFullYear()}-${
     date.getMonth() + 1
   }-${date.getDate()}`;
   const navigation = useNavigation();
   return (
-    <Pressable onPress={() => navigation.navigate("ManageExpenses")}>
+    <Pressable
+      onPress={() => navigation.navigate("ManageExpenses", { expenseId: id })}
+    >
       <View style={styles.container}>
         <View>
           <Text style={[styles.textBade, styles.description]}>

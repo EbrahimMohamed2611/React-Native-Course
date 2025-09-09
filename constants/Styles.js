@@ -5,6 +5,7 @@ export const GlobalStyles = {
     itemBackground: "#252A34",
     yellowBackgrund: "#ffeda4",
     yellowLatter: "#ffd83c",
+    danger: "#ff3c3c",
     greenText: "#71AD5E",
   },
 };
