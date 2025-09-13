@@ -1,5 +1,4 @@
 import { View, StyleSheet, Text } from "react-native";
-import colors from "./utils/colors";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RecentExpensess from "./screens/RecentExpensess";
@@ -11,6 +10,7 @@ import { GlobalStyles } from "./constants/Styles";
 
 import { Ionicons } from "@expo/vector-icons";
 import ButtonIcon from "./components/UI/ButtonIcon";
+import ExpensesContextProvider from "./store/redux/expenses-context";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -63,30 +63,32 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="ExpnesesOverview"
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: GlobalStyles.colors.background,
-            },
-            headerTintColor: "white",
-          }}
-        >
-          <Stack.Screen
-            name="ManageExpenses"
-            component={ManageExpensess}
-            options={{ presentation: "modal" }}
-          />
-          <Stack.Screen
-            name="ExpnesesOverview"
-            component={ExpensesOverview}
-            options={{
-              headerShown: false,
+      <ExpensesContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="ExpnesesOverview"
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: GlobalStyles.colors.background,
+              },
+              headerTintColor: "white",
             }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            <Stack.Screen
+              name="ManageExpenses"
+              component={ManageExpensess}
+              options={{ presentation: "modal" }}
+            />
+            <Stack.Screen
+              name="ExpnesesOverview"
+              component={ExpensesOverview}
+              options={{
+                headerShown: false,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ExpensesContextProvider>
     </>
   );
 }

@@ -1,21 +1,37 @@
 import { StyleSheet, View } from "react-native";
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 
 import ButtonIcon from "../components/UI/ButtonIcon";
 import { GlobalStyles } from "../constants/Styles";
 import AppButton from "../components/UI/AppButton";
+import { ExpenenseContext } from "../store/redux/expenses-context";
 
 export default function ManageExpensess({ route, navigation }) {
+  const expenseCtx = useContext(ExpenenseContext);
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId;
 
   function onDeleteHandeler() {
+    expenseCtx.deleteExpense(editedExpenseId);
     navigation.goBack();
   }
   function onCancelHandeler() {
     navigation.goBack();
   }
   function onConfirmHandeler() {
+    if (isEditing) {
+      expenseCtx.updateExpense(editedExpenseId, {
+        description: "test1",
+        amount: 100.99,
+        date: new Date("2025-09-10"),
+      });
+    } else {
+      expenseCtx.addExpense({
+        description: "new Book",
+        amount: 1000.23,
+        date: new Date("2025-09-11"),
+      });
+    }
     navigation.goBack();
   }
 

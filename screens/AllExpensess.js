@@ -1,18 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { GlobalStyles } from "../constants/Styles";
+import { useContext } from "react";
 import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput";
+import { ExpenenseContext } from "../store/redux/expenses-context";
 
 export default function AllExpensess() {
+  const expensesCtx = useContext(ExpenenseContext);
   return (
     <>
-      <ExpensesOutput expensesPeriod="Total" />;
+      <ExpensesOutput expenses={expensesCtx.expenses} expensesPeriod="Total" />
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    color: "#fff",
-  },
-});
