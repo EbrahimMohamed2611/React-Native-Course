@@ -31,8 +31,13 @@ const styles = StyleSheet.create({
   },
   flat: {
     backgroundColor: "transparent",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: "#ffdb67",
   },
-  flatText: {},
+  flatText: {
+    color: "#ffdb67",
+  },
   prseed: {
     opacity: 0.75,
     borderRadius: 8,
