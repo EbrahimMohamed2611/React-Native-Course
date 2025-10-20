@@ -6,6 +6,7 @@ import { GlobalStyles } from "../constants/Styles";
 
 import { ExpenenseContext } from "../store/redux/expenses-context";
 import Form from "../components/ManageExpenses/Form";
+import { storeExpense } from "../utils/http";
 
 export default function ManageExpensess({ route, navigation }) {
   const expenseCtx = useContext(ExpenenseContext);
@@ -27,6 +28,7 @@ export default function ManageExpensess({ route, navigation }) {
     if (isEditing) {
       expenseCtx.updateExpense(editedExpenseId, expenseDate);
     } else {
+      storeExpense(expenseDate);
       expenseCtx.addExpense(expenseDate);
     }
     navigation.goBack();
